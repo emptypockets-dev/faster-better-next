@@ -38,13 +38,13 @@ Blog.defaultProps = {
  */
 
 // at the bottom
-export async function getStaticPaths() {
-  const postsPath = path.join(process.cwd(), 'posts')
-  const filenames = fs.readdirSync(postsPath)
-  const paths = filenames.map((name) => ({ params: { slug: name.replace('.mdx', '') } }))
-  // don't get paths for cms posts, instead, let fallback handle it
-  return { paths, fallback: true }
-}
+// export async function getStaticPaths() {
+//   const postsPath = path.join(process.cwd(), 'posts')
+//   const filenames = fs.readdirSync(postsPath)
+//   const paths = filenames.map((name) => ({ params: { slug: name.replace('.mdx', '') } }))
+//   // don't get paths for cms posts, instead, let fallback handle it
+//   return { paths, fallback: false }
+// }
 
 export async function getStaticProps(ctx) {
   const postsDirectory = path.join(process.cwd(), 'posts')
