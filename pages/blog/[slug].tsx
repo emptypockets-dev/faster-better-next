@@ -10,7 +10,6 @@ import { useRouter } from 'next/router'
 import { Post } from '../../types'
 import Container from '../../components/container'
 import HomeNav from '../../components/homeNav'
-import { posts as postsFromCMS } from '../../content'
 
 const BlogPost: FC<Post> = ({ source, frontMatter }) => {
   const content = hydrate(source)
@@ -50,22 +49,13 @@ export async function getStaticPaths() {
   const filenames = fs.readdirSync(postsPath)
   const paths = filenames.map((name) => ({ params: { slug: name.replace('.mdx', '') } }))
   // don't get paths for cms posts, instead, let fallback handle it
-  return { paths, fallback: true }
+  return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params, preview }) {
   let postFile
-  try {
-    const postPath = path.join(process.cwd(), 'posts', `${params.slug}.mdx`)
-    postFile = fs.readFileSync(postPath, 'utf-8')
-  } catch {
-    // must be from cms or its a 404
-    const collection = preview ? postsFromCMS.draft : postsFromCMS.published
-    postFile = collection.find((p) => {
-      const { data } = matter(p)
-      return data.slug === params.slug
-    })
-  }
+  const postPath = path.join(process.cwd(), 'posts', `${params.slug}.mdx`)
+  postFile = fs.readFileSync(postPath, 'utf-8')
 
   if (!postFile) {
     throw new Error('no post')
