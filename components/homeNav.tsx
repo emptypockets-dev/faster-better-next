@@ -10,18 +10,17 @@ const HomeNav: FC<{ links?: { name: string; link: string }[] }> = ({ links }) =>
 
   return (
     <nav>
-      <Pane width="100vw" paddingY={majorScale(1)} borderBottom height={majorScale(9)}>
+      <Pane width="100vw" paddingTop={majorScale(10)} height={majorScale(9)}>
         <Container height="100%">
           <Pane display="flex" justifyContent="space-between" alignItems="center" height="100%">
             <Logo />
-
             <Pane display="flex" justifyContent="space-around" alignItems="center">
               {links && links.length > 0
                 ? links.map((link) => (
-                    <Pane paddingX={majorScale(3)} key={link.name}>
+                    <Pane paddingX={majorScale(1)} key={link.name}>
                       <NextLink href="/blog">
                         <a>
-                          <Text fontSize="16px">Blog</Text>
+                          <Text fontSize="16px">Posts</Text>
                         </a>
                       </NextLink>
                     </Pane>
@@ -32,7 +31,7 @@ const HomeNav: FC<{ links?: { name: string; link: string }[] }> = ({ links }) =>
                 <NextLink href={session ? '/app' : '/signin'}>
                   <a>
                     <Button appearance="primary" fontSize="16px">
-                      {session ? 'Dashboard' : 'Sign up'}
+                      Github
                     </Button>
                   </a>
                 </NextLink>

@@ -11,7 +11,9 @@ const FeatureSection: FC<{ invert?: boolean; title: string; body: string; image:
 }) => {
   const Left = () => (
     <Pane>
-      <Heading size={900}>{title}</Heading>
+      <Heading size={900} marginBottom={10}>
+        {title}
+      </Heading>
       <Paragraph size={500}>{body}</Paragraph>
     </Pane>
   )
@@ -24,7 +26,7 @@ const FeatureSection: FC<{ invert?: boolean; title: string; body: string; image:
   const children = invert ? [Right, Left] : [Left, Right]
   return (
     <Pane
-      minHeight="70vh"
+      minHeight="40vh"
       background={invert ? 'tint1' : 'white'}
       paddingY={majorScale(8)}
       borderTop
@@ -36,7 +38,7 @@ const FeatureSection: FC<{ invert?: boolean; title: string; body: string; image:
       <Container height="100%">
         <Pane display="flex" alignItems="flex-start" justifyContent="space-between">
           {children.map((Child, i) => (
-            <Pane key={i} width="50%" paddingX={majorScale(3)}>
+            <Pane key={i} width="50%" paddingRight={majorScale(6)}>
               <Child />
             </Pane>
           ))}

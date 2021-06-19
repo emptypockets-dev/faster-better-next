@@ -18,7 +18,7 @@ const Blog = ({ posts }) => {
       <main>
         <Container>
           {posts.map((post) => (
-            <Pane key={post.title} marginY={majorScale(5)}>
+            <Pane key={post.title} display="flex" alignItems="center" marginX={majorScale(2)} marginY={majorScale(2)}>
               <PostPreview post={post} />
             </Pane>
           ))}
@@ -32,9 +32,40 @@ Blog.defaultProps = {
   posts: [],
 }
 
-export default Blog
-
 /**
  * Need to get the posts from the
  * fs and our CMS
  */
+
+// at the bottom
+export async function getStaticPaths() {
+  const postsPath = path.join(process.cwd(), 'posts')
+  const filenames = fs.readdirSync(postsPath)
+  const paths = filenames.map((name) => ({ params: { slug: name.replace('.mdx', '') } }))
+  // don't get paths for cms posts, instead, let fallback handle it
+  return { paths, fallback: true }
+}
+
+export async function getStaticProps(ctx) {
+  const postsDirectory = path.join(process.cwd(), 'posts')
+  const filenames = fs.readdirSync(postsDirectory)
+  // check that preview boolean
+  const cmsPosts = ctx.preview ? postsFromCMS.draft : postsFromCMS.published
+  const filePosts = filenames.map((filename) => {
+    const filePath = path.join(postsDirectory, filename)
+    return fs.readFileSync(filePath, 'utf8')
+  })
+
+  const posts = orderby(
+    [...cmsPosts, ...filePosts].map((content) => {
+      const { data } = matter(content)
+      return data
+    }),
+    ['publishedOn'],
+    ['desc'],
+  )
+
+  return { props: { posts } }
+}
+
+export default Blog

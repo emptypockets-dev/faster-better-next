@@ -11,17 +11,18 @@ export const home = {
   },
   published: {
     hero: {
-      title: 'A beautiful knowledge base for your whole team.',
-      body: 'High performing teams use Known to document and record everything. Some other cool SaaS tag line here.',
+      title: 'Sharing makes the web better + faster.',
+      body: "Today's post is about adding Webpack to the Hubspot boilerplate so that you can optimize your javascript, css, and images.",
     },
     features: [
       {
-        title: 'Next gen editor',
-        body:
-          'Forget about markdown and rich text. Our editor is superchared to handle any content you can throug at it.',
+        title: 'Webpack config in Hubspot (32% version)',
+        body: 'An up-to-date webpack config that works in Hubspot',
       },
-      { title: 'Stay organized', body: 'Use folders to put your docs right where you need them when you need them.' },
-      { title: 'Beautiful design', body: 'Award wining design that you will fall in love with.' },
+      {
+        title: 'Build a smart Thumbnail component in React',
+        body: 'Use tags in each post to generate a "garden" thumbnail. Each color represents a different tool, language, or framework.',
+      },
     ],
   },
 }

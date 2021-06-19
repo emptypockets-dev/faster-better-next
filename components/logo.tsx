@@ -1,14 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import { Text } from 'evergreen-ui'
+import Image from 'next/image'
 
 const Logo = ({ ...styles }) => {
   return (
     <Link href="/">
-      <a>
-        <Text fontSize="30px" color="#47B881" {...styles}>
-          <strong>Known.</strong>
-        </Text>
+      <a style={{ position: 'relative', width: '200px', height: '75px', left: '-5px' }}>
+        <Image src="/ak-logo.png" alt="me" layout="fill" objectFit="contain" />
       </a>
     </Link>
   )
