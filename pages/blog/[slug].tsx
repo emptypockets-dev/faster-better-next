@@ -22,10 +22,11 @@ const BlogPost: FC<Post> = ({ source, frontMatter }) => {
       </Pane>
     )
   }
+
   return (
     <Pane>
       <Head>
-        <title>{`Known Blog | ${frontMatter.title}`}</title>
+        <title>{`Andrey's Blog | ${frontMatter.title}`}</title>
         <meta name="description" content={frontMatter.summary} />
       </Head>
       <header>
@@ -48,7 +49,6 @@ export async function getStaticPaths() {
   const postsPath = path.join(process.cwd(), 'posts')
   const filenames = fs.readdirSync(postsPath)
   const paths = filenames.map((name) => ({ params: { slug: name.replace('.mdx', '') } }))
-  // don't get paths for cms posts, instead, let fallback handle it
   return { paths, fallback: false }
 }
 
