@@ -30,9 +30,7 @@ const HomeNav: FC<{ links?: { name: string; link: string }[] }> = ({ links }) =>
               <Pane paddingX={majorScale(3)}>
                 <NextLink href={session ? '/app' : '/signin'}>
                   <a>
-                    <Button appearance="primary" fontSize="16px">
-                      Github
-                    </Button>
+                    <Button fontSize="16px">Github</Button>
                   </a>
                 </NextLink>
               </Pane>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pane, majorScale } from 'evergreen-ui'
+import { Pane, majorScale, GridIcon } from 'evergreen-ui'
 import matter from 'gray-matter'
 import path from 'path'
 import fs from 'fs'
@@ -7,7 +7,6 @@ import orderby from 'lodash.orderby'
 import Container from '../../components/container'
 import HomeNav from '../../components/homeNav'
 import PostPreview from '../../components/postPreview'
-import { posts as postsFromCMS } from '../../content'
 
 const Blog = ({ posts }) => {
   return (
@@ -16,9 +15,11 @@ const Blog = ({ posts }) => {
         <HomeNav />
       </header>
       <main>
-        <Container>
+        <Container
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: majorScale(4), marginTop: '100px' }}
+        >
           {posts.map((post) => (
-            <Pane key={post.title} display="flex" alignItems="center" marginX={majorScale(2)} marginY={majorScale(2)}>
+            <Pane key={post.title}>
               <PostPreview post={post} />
             </Pane>
           ))}
@@ -50,14 +51,13 @@ export async function getStaticProps(ctx) {
   const postsDirectory = path.join(process.cwd(), 'posts')
   const filenames = fs.readdirSync(postsDirectory)
   // check that preview boolean
-  const cmsPosts = ctx.preview ? postsFromCMS.draft : postsFromCMS.published
   const filePosts = filenames.map((filename) => {
     const filePath = path.join(postsDirectory, filename)
     return fs.readFileSync(filePath, 'utf8')
   })
 
   const posts = orderby(
-    [...cmsPosts, ...filePosts].map((content) => {
+    [...filePosts].map((content) => {
       const { data } = matter(content)
       return data
     }),
