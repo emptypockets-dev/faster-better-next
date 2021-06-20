@@ -12,7 +12,7 @@ export const home = {
   published: {
     hero: {
       title: 'Sharing makes the web better + faster.',
-      body: "Happy Saturday! Today's post is about adding Webpack to the Hubspot boilerplate so that you can optimize your javascript, css, and images.",
+      body: "Happy Sunday! Today's post is about adding Webpack to the Hubspot boilerplate so that you can optimize your javascript, css, and images.",
     },
     features: [
       {
